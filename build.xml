@@ -9,6 +9,7 @@
       <classpath>
         <pathelement location="lib/ceylon.language-1.1.1.jar"/>
         <pathelement location="lib/weld-se-2.2.9.Final.jar"/>
+        <pathelement location="lib/helloworld-1.0.0.jar"/>
       </classpath>
     </javac>
     <copy todir="target/classes">

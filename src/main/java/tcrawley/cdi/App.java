@@ -30,8 +30,8 @@ public class App {
         Something something = container.instance().select(Something.class).get();
         System.out.println("From java: " + something.message());
 
-        Runner runner = initCeylon();
-        System.out.println("running helloworld module");
-        runner.run();
+        initCeylon();
+        helloworld.Something ceylonObj = container.instance().select(helloworld.Something.class).get();
+        System.out.println("From ceylon: " + ceylonObj.message());
     }
 }
