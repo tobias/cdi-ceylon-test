@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Sample Ceylon build script using Ant.
+-->
+<project name="helloworld" default="copy-module">
+
+    <!-- Try to determine where Ceylon is installed -->
+    <property environment="env"/>
+    <!-- <property name="ceylon.home" value="/home/tcrawley/work/ceylon/ceylon-dist/dist" />  -->
+    <property name="env.CEYLON_HOME" value="${ceylon.home}"/>
+
+    <property name="ceylon.ant.lib" value="${env.CEYLON_HOME}/lib/ceylon-ant.jar"/>
+    <property name="source.encoding" value="UTF-8"/>
+
+    <target name="ceylon-ant-taskdefs">
+        <path id="ant-tasks">
+            <pathelement location="${ceylon.ant.lib}"/>
+        </path>
+        <typedef resource="com/redhat/ceylon/ant/antlib.xml" classpathref="ant-tasks"/>
+    </target>
+
+    <target name="compile" depends="ceylon-ant-taskdefs, clean">
+        <ceylon-compile encoding="${source.encoding}">
+            <module name="helloworld"/>
+        </ceylon-compile>
+    </target>
+
+    <target name="clean">
+      <delete dir="modules/helloworld"/>
+    </target>
+
+    <target name="copy-module" depends="compile">
+      <copy file="modules/helloworld/1.0.0/helloworld-1.0.0.car" tofile="../lib/helloworld-1.0.0.jar"/>
+    </target>
+</project>

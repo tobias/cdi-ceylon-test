@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cdi-ceylon-test" default="run">
+
+  <target name="compile">
+    <mkdir dir="target/classes"/>
+    <javac srcdir="src/main/java"
+           destdir="target/classes"
+           includeantruntime="false">
+      <classpath>
+        <pathelement location="lib/ceylon.language-1.1.1.jar"/>
+        <pathelement location="lib/weld-se-2.2.9.Final.jar"/>
+      </classpath>
+    </javac>
+    <copy todir="target/classes">
+      <fileset dir="src/main/resources"/>
+    </copy>
+  </target>
+
+  <target name="build-jar" depends="compile">
+    <jar destfile="target/cdi-ceylon-test.jar" basedir="target/classes"/>
+  </target>
+
+  <target name="run" depends="build-jar">
+    <java classname="tcrawley.cdi.App" fork="true">
+      <classpath>
+        <fileset dir="lib">
+          <include name="*.jar"/>
+        </fileset>
+        <pathelement location="target/cdi-ceylon-test.jar"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="clean" depends="">
+    <delete dir="target"/>
+  </target>
+
+</project>
